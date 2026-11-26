@@ -1,5 +1,11 @@
 [
   {
+    "name": "Dummy Card",
+    "pitch": "Card of the Dummy character.",
+    "label": "quality",
+    "image": "images/TransformativePlush_Image.jpg"
+  },
+  {
     "name": "Transformative Plush",
     "pitch": "A destructive character right on your desk!",
     "label": "handmade",
