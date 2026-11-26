@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Transformative Plush",
+    "pitch": "A destructive character right on your desk!",
+    "label": "handmade",
+    "image": "images/TransformativePlush_Image.jpg"
+  },
+  {
+    "name": "Weird-Looking Pineapples Card",
+    "pitch": "A card with the three pineapples character",
+    "label": "quality",
+    "image": "images/Weird-LookingPineapplesCard_Image.jpg"
+  },
+  {
+    "name": "Spire Card",
+    "pitch": "A card of Spire",
+    "label": "new",
+    "image": "images/SpireCard_Image.jpg"
+  },
+  {
+    "name": "Cubey Plush",
+    "pitch": "Quality plush of the Cubey character",
+    "label": "handmade",
+    "image": "images/CubeyPlush_Image.jpg"
+  }
+]

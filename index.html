@@ -3,10 +3,744 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My first page</title>
+  <meta name="theme-color" content="#2456e8">
+  <meta name="description" content="Meet a small collection of character cards and plushies from flat pancake studio.">
+  <title>flat pancake — cards &amp; plushies</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --cobalt: #2456e8;
+      --deep-tide: #102244;
+      --frozen-air: #eaf4ff;
+      --electric-aqua: #65ddf3;
+      --fresh-white: #fbfdff;
+      --line-blue: #cbdcf2;
+      --muted-blue: #536680;
+      --page-width: 1240px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 92px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--fresh-white);
+      color: var(--deep-tide);
+      font-family: "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, a { font: inherit; }
+    a { color: inherit; }
+    button:focus-visible, a:focus-visible, dialog:focus-visible {
+      outline: 3px solid var(--electric-aqua);
+      outline-offset: 4px;
+    }
+
+    .site-bar {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgb(16 34 68 / 10%);
+      background: rgb(251 253 255 / 94%);
+      backdrop-filter: blur(14px);
+    }
+
+    .bar-inner {
+      width: min(100% - 48px, var(--page-width));
+      min-height: 76px;
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--deep-tide);
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      letter-spacing: -0.055em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 27px;
+      height: 21px;
+      position: relative;
+      border-radius: 52% 52% 42% 42%;
+      background: var(--cobalt);
+      transform: rotate(-7deg);
+    }
+
+    .brand-mark::before, .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset-inline: 3px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--electric-aqua);
+    }
+
+    .brand-mark::before { top: 5px; }
+    .brand-mark::after { top: 12px; background: var(--fresh-white); }
+
+    .main-nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 38px); }
+    .main-nav a {
+      color: var(--deep-tide);
+      font-size: 0.93rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .main-nav a:hover { color: var(--cobalt); }
+    .nav-cta {
+      padding: 11px 17px;
+      border-radius: 999px;
+      background: var(--deep-tide);
+      color: white !important;
+    }
+
+    .nav-cta:hover { background: var(--cobalt); }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: var(--cobalt);
+      color: white;
+      isolation: isolate;
+    }
+
+    .hero::before, .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 530px;
+      aspect-ratio: 1;
+      right: -170px;
+      top: -245px;
+      border: 1px solid rgb(255 255 255 / 24%);
+      border-radius: 50%;
+      box-shadow: 0 0 0 36px rgb(255 255 255 / 5%), 0 0 0 72px rgb(255 255 255 / 4%);
+    }
+
+    .hero::after {
+      width: 210px;
+      height: 210px;
+      left: 42%;
+      bottom: -170px;
+      border-radius: 50%;
+      background: var(--electric-aqua);
+      opacity: 0.2;
+      filter: blur(2px);
+    }
+
+    .hero-inner {
+      width: min(100% - 48px, var(--page-width));
+      min-height: 600px;
+      margin-inline: auto;
+      padding-block: clamp(64px, 8vw, 106px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(370px, 0.88fr);
+      align-items: center;
+      gap: clamp(40px, 8vw, 108px);
+    }
+
+    .hero-copy { max-width: 590px; }
+    .hero-kicker, .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 20px;
+      font-size: 0.93rem;
+      font-weight: 800;
+    }
+
+    .hero-kicker::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--electric-aqua);
+      box-shadow: 0 0 0 5px rgb(101 221 243 / 18%);
+    }
+
+    h1, h2, h3, p { margin-block-start: 0; }
+    h1, h2, h3 { font-family: "Trebuchet MS", "Segoe UI", sans-serif; }
+
+    h1 {
+      max-width: 700px;
+      margin-block-end: 22px;
+      font-size: clamp(3.1rem, 6vw, 5.55rem);
+      line-height: 0.99;
+      letter-spacing: -0.075em;
+      font-weight: 900;
+    }
+
+    .hero-intro {
+      max-width: 460px;
+      margin-block-end: 32px;
+      color: rgb(255 255 255 / 87%);
+      font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+      line-height: 1.65;
+    }
+
+    .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
+    .button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--fresh-white);
+      color: var(--deep-tide);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .button:hover { background: var(--electric-aqua); }
+
+    .hero-visual { position: relative; max-width: 500px; justify-self: end; width: 100%; }
+    .hero-photo-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 0.9;
+      padding: 12px;
+      border: 1px solid rgb(255 255 255 / 70%);
+      border-radius: 9px;
+      background: var(--frozen-air);
+      box-shadow: 16px 16px 0 rgb(16 34 68 / 22%);
+      transform: rotate(1.5deg);
+    }
+
+    .hero-photo-frame .photo-slot { border-radius: 4px; }
+    .hero-photo-frame > .photo-slot { position: absolute; inset: 12px; overflow: hidden; }
+    .hero-sticker {
+      position: absolute;
+      z-index: 2;
+      top: -17px;
+      left: -23px;
+      display: grid;
+      width: 88px;
+      aspect-ratio: 1;
+      place-content: center;
+      padding: 10px;
+      border: 3px solid var(--cobalt);
+      border-radius: 50%;
+      background: var(--electric-aqua);
+      color: var(--deep-tide);
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: 0.88rem;
+      font-weight: 900;
+      line-height: 1.05;
+      text-align: center;
+      transform: rotate(-9deg);
+    }
+
+    .hero-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin: 24px 2px 0;
+    }
+
+    .hero-caption strong {
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+      letter-spacing: -0.04em;
+    }
+
+    .hero-caption span { max-width: 190px; color: rgb(255 255 255 / 76%); font-size: 0.91rem; text-align: right; }
+
+    .collection {
+      width: min(100% - 48px, var(--page-width));
+      margin-inline: auto;
+      padding-block: clamp(74px, 9vw, 120px) clamp(86px, 10vw, 128px);
+    }
+
+    .collection-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-block-end: 34px;
+    }
+
+    .collection-title-wrap { max-width: 650px; }
+    .section-kicker { margin-block-end: 12px; color: var(--cobalt); }
+
+    h2 {
+      margin-block-end: 12px;
+      font-size: clamp(2.35rem, 4vw, 3.75rem);
+      line-height: 1.04;
+      letter-spacing: -0.07em;
+    }
+
+    .collection-intro { margin: 0; color: var(--muted-blue); font-size: 1rem; line-height: 1.65; }
+
+    .collection-count {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 11px 15px;
+      border: 1px solid var(--line-blue);
+      border-radius: 999px;
+      background: var(--frozen-air);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .collection-count::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--cobalt); }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .product-card {
+      min-width: 0;
+      padding: 11px 11px 18px;
+      border: 1px solid var(--line-blue);
+      border-radius: 8px;
+      background: white;
+      color: var(--deep-tide);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .product-photo { position: relative; display: block; overflow: hidden; aspect-ratio: 1 / 0.93; border-radius: 4px; background: var(--frozen-air); }
+    .product-photo img, .detail-photo img, .hero-photo-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    .product-content { display: block; padding: 16px 4px 0; }
+    .product-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-block-end: 12px; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 25px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--frozen-air);
+      color: var(--deep-tide);
+      font-size: 0.74rem;
+      font-weight: 800;
+    }
+
+    .tag-bestseller { background: var(--electric-aqua); }
+
+    .product-name {
+      display: block;
+      min-height: 2.6em;
+      margin-block-end: 7px;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+      font-weight: 900;
+      letter-spacing: -0.045em;
+      line-height: 1.18;
+    }
+
+    .product-pitch { display: block; min-height: 3.2em; color: var(--muted-blue); font-size: 0.88rem; line-height: 1.5; }
+    .product-action { display: inline-block; margin-block-start: 17px; color: var(--cobalt); font-size: 0.86rem; font-weight: 800; }
+
+    .photo-placeholder {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 10px;
+      padding: 18px;
+      background: var(--frozen-air);
+      color: var(--muted-blue);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .photo-placeholder[hidden] { display: none; }
+    .placeholder-mark { position: relative; width: 54px; height: 40px; border: 2px solid #95b4df; border-radius: 5px; }
+    .placeholder-mark::before { content: ""; position: absolute; width: 22px; height: 22px; top: -10px; right: -9px; border: 2px solid #95b4df; border-radius: 50%; background: var(--frozen-air); }
+    .placeholder-mark::after { content: ""; position: absolute; left: 8px; right: 8px; bottom: 7px; height: 13px; border-top: 2px solid #95b4df; transform: skewY(-20deg); }
+
+    .empty-message, .error-message {
+      margin: 24px 0 0;
+      padding: 18px 20px;
+      border-radius: 7px;
+      background: var(--frozen-air);
+      color: var(--deep-tide);
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .error-message { border-left: 4px solid var(--cobalt); }
+
+    .site-footer { background: var(--deep-tide); color: white; }
+    .footer-inner {
+      width: min(100% - 48px, var(--page-width));
+      min-height: 96px;
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: rgb(255 255 255 / 82%);
+      font-size: 0.9rem;
+    }
+
+    .footer-brand { color: white; font-family: "Trebuchet MS", sans-serif; font-weight: 900; letter-spacing: -0.04em; }
+
+    .detail-dialog {
+      width: min(900px, calc(100% - 32px));
+      max-width: 900px;
+      max-height: min(88svh, 780px);
+      padding: 18px;
+      overflow: auto;
+      border: 1px solid var(--line-blue);
+      border-radius: 12px;
+      background: var(--fresh-white);
+      color: var(--deep-tide);
+      box-shadow: 0 24px 80px rgb(16 34 68 / 30%);
+    }
+
+    .detail-dialog::backdrop { background: rgb(10 26 54 / 65%); backdrop-filter: blur(5px); }
+    .detail-close {
+      position: sticky;
+      z-index: 2;
+      top: 0;
+      float: right;
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid var(--line-blue);
+      border-radius: 50%;
+      background: white;
+      color: var(--deep-tide);
+      font-size: 1.55rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .detail-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr); align-items: center; gap: clamp(24px, 5vw, 48px); padding: 12px; }
+    .detail-photo { position: relative; min-height: 300px; aspect-ratio: 1 / 0.92; overflow: hidden; border-radius: 7px; background: var(--frozen-air); }
+    .detail-photo > .photo-slot { position: absolute; inset: 0; overflow: hidden; }
+    .detail-copy { padding: 28px 16px 28px 0; }
+    .detail-copy h2 { margin-block: 16px 12px; font-size: clamp(2rem, 4vw, 3rem); }
+    .detail-copy p { color: var(--muted-blue); font-size: 1.04rem; line-height: 1.65; }
+    .detail-copy .tag { margin-block-end: 5px; }
+
+    @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+      .product-card { transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease; }
+      .product-card:hover { border-color: var(--cobalt); box-shadow: 0 12px 28px rgb(36 86 232 / 12%); transform: translateY(-5px); }
+      .product-card .product-photo img { transition: transform 260ms ease; }
+      .product-card:hover .product-photo img { transform: scale(1.035); }
+      .button, .nav-cta { transition: background-color 160ms ease, color 160ms ease; }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .motion-ready .reveal { opacity: 0; transform: translateY(14px); transition: opacity 520ms ease, transform 520ms cubic-bezier(.2,.75,.25,1); }
+      .motion-ready .reveal.is-visible { opacity: 1; transform: translateY(0); }
+      .motion-ready .product-card:nth-child(2) { transition-delay: 45ms; }
+      .motion-ready .product-card:nth-child(3) { transition-delay: 90ms; }
+      .motion-ready .product-card:nth-child(4) { transition-delay: 135ms; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner { min-height: 0; grid-template-columns: minmax(0, 1fr) minmax(280px, 0.84fr); gap: 35px; }
+      .hero-photo-frame { box-shadow: 11px 11px 0 rgb(16 34 68 / 22%); }
+      .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
+    }
+
+    @media (max-width: 640px) {
+      html { scroll-padding-top: 74px; }
+      .bar-inner, .hero-inner, .collection, .footer-inner { width: min(100% - 32px, var(--page-width)); }
+      .bar-inner { min-height: 66px; gap: 12px; }
+      .brand { gap: 8px; font-size: 1rem; }
+      .brand-mark { width: 23px; height: 18px; }
+      .brand-mark::before { top: 4px; }
+      .brand-mark::after { top: 10px; }
+      .main-nav { gap: 12px; }
+      .main-nav a { font-size: 0.84rem; }
+      .main-nav a:first-child { display: none; }
+      .nav-cta { padding: 10px 13px; }
+      .hero-inner { grid-template-columns: minmax(0, 1fr); gap: 42px; padding-block: 57px 63px; }
+      .hero-copy { max-width: 520px; }
+      h1 { max-width: 530px; font-size: clamp(3rem, 12vw, 4.25rem); }
+      .hero-intro { max-width: 420px; font-size: 1rem; }
+      .hero-visual { width: min(100% - 16px, 460px); justify-self: center; }
+      .hero-sticker { left: -15px; width: 76px; font-size: 0.8rem; }
+      .hero-caption { margin-block-start: 19px; }
+      .collection { padding-block: 70px 82px; }
+      .collection-head { display: block; margin-block-end: 24px; }
+      .collection-count { margin-block-start: 18px; }
+      .product-grid { gap: 11px; }
+      .product-card { padding: 7px 7px 13px; border-radius: 6px; }
+      .product-photo { aspect-ratio: 1 / 0.9; }
+      .product-content { padding: 12px 3px 0; }
+      .product-tags { gap: 5px; margin-block-end: 9px; }
+      .tag { min-height: 23px; padding: 4px 7px; font-size: 0.68rem; }
+      .product-name { min-height: 2.45em; font-size: clamp(0.98rem, 4.2vw, 1.16rem); }
+      .product-pitch { min-height: 4.5em; font-size: 0.8rem; line-height: 1.42; }
+      .product-action { margin-block-start: 13px; font-size: 0.8rem; }
+      .footer-inner { min-height: 86px; align-items: flex-start; justify-content: center; flex-direction: column; gap: 5px; }
+      .detail-layout { grid-template-columns: minmax(0, 1fr); gap: 15px; padding: 5px; }
+      .detail-photo { min-height: 0; max-height: 46svh; }
+      .detail-copy { padding: 0 10px 15px; }
+      .detail-copy h2 { padding-inline-end: 35px; font-size: 2rem; }
+    }
+
+    @media (max-width: 360px) {
+      .bar-inner, .hero-inner, .collection, .footer-inner { width: min(100% - 24px, var(--page-width)); }
+      .brand { font-size: 0.92rem; }
+      .main-nav { gap: 8px; }
+      .nav-cta { padding-inline: 10px; }
+      .product-grid { gap: 8px; }
+      .product-pitch { font-size: 0.76rem; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello world!</h1>
-  <p>im-a-flat-pancake</p>
+  <header class="site-bar">
+    <div class="bar-inner">
+      <a class="brand" href="#top" aria-label="flat pancake studio home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>flat pancake</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#collection">The collection</a>
+        <a class="nav-cta" href="#collection">Meet the characters</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="hero-kicker">Cards &amp; plushies</p>
+          <h1 id="hero-title">Cards for your wall. Plushies for your desk.</h1>
+          <p class="hero-intro">A little collection of odd, lovable characters, each with a personality of its own.</p>
+          <div class="hero-actions">
+            <a class="button" href="#collection">Browse the collection</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Bestseller spotlight">
+          <span class="hero-sticker">Best<br>seller</span>
+          <div class="hero-photo-frame" id="hero-photo" aria-label="Bestseller photo">
+            <div class="photo-placeholder" role="img" aria-label="Photo coming soon">
+              <span class="placeholder-mark" aria-hidden="true"></span>
+              <span>Photo coming soon</span>
+            </div>
+          </div>
+          <div class="hero-caption">
+            <strong id="bestseller-name">Bestseller</strong>
+            <span id="bestseller-pitch">Meet the desk-side favorite.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="collection" id="collection" aria-labelledby="collection-title">
+      <div class="collection-head reveal">
+        <div class="collection-title-wrap">
+          <p class="section-kicker">The collection</p>
+          <h2 id="collection-title">Small characters. Big moods.</h2>
+          <p class="collection-intro">Meet each one up close. Choose a card to see its photo and details.</p>
+        </div>
+        <span class="collection-count" id="collection-count">Four characters</span>
+      </div>
+      <div class="product-grid" id="product-grid" aria-live="polite">
+        <p class="empty-message">Loading the collection…</p>
+      </div>
+      <p class="error-message" id="load-error" role="alert" hidden></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-brand">flat pancake</span>
+      <span>Cards &amp; plushies with character.</span>
+    </div>
+  </footer>
+
+  <dialog class="detail-dialog" id="detail-dialog" aria-labelledby="detail-title">
+    <button class="detail-close" type="button" aria-label="Close detail view">×</button>
+    <div class="detail-layout">
+      <div class="detail-photo" id="detail-photo"></div>
+      <div class="detail-copy">
+        <span class="tag" id="detail-label"></span>
+        <span class="tag tag-bestseller" id="detail-bestseller" hidden>Bestseller</span>
+        <h2 id="detail-title"></h2>
+        <p id="detail-pitch"></p>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    const productGrid = document.querySelector('#product-grid');
+    const loadError = document.querySelector('#load-error');
+    const detailDialog = document.querySelector('#detail-dialog');
+    const detailClose = document.querySelector('.detail-close');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function makePhoto(product, kind, eager = false) {
+      const slot = document.createElement('div');
+      slot.className = `photo-slot ${kind}`;
+
+      const placeholder = document.createElement('div');
+      placeholder.className = 'photo-placeholder';
+      placeholder.setAttribute('role', 'img');
+      placeholder.setAttribute('aria-label', `Photo coming soon for ${product.name}`);
+      placeholder.innerHTML = '<span class="placeholder-mark" aria-hidden="true"></span><span>Photo coming soon</span>';
+
+      const imagePath = typeof product.image === 'string' ? product.image.trim() : '';
+      if (!imagePath) {
+        slot.append(placeholder);
+        return slot;
+      }
+
+      const image = document.createElement('img');
+      image.src = imagePath;
+      image.alt = `${product.name} photo`;
+      image.loading = eager ? 'eager' : 'lazy';
+      image.addEventListener('error', () => {
+        image.remove();
+        placeholder.hidden = false;
+        slot.append(placeholder);
+      }, { once: true });
+      slot.append(image);
+      slot.append(placeholder);
+      placeholder.hidden = true;
+      return slot;
+    }
+
+    function revealOnScroll() {
+      if (prefersReducedMotion) return;
+      const revealItems = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        revealItems.forEach(item => item.classList.add('is-visible'));
+        return;
+      }
+      document.documentElement.classList.add('motion-ready');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealItems.forEach(item => observer.observe(item));
+    }
+
+    function openDetails(product, isBestseller) {
+      document.querySelector('#detail-photo').replaceChildren(makePhoto(product, 'photo-slot detail-slot', true));
+      document.querySelector('#detail-label').textContent = product.label || 'product';
+      document.querySelector('#detail-bestseller').hidden = !isBestseller;
+      document.querySelector('#detail-title').textContent = product.name;
+      document.querySelector('#detail-pitch').textContent = product.pitch;
+      detailDialog.showModal();
+    }
+
+    function makeCard(product, index) {
+      const card = document.createElement('button');
+      const isBestseller = index === 0;
+      card.className = 'product-card reveal';
+      card.type = 'button';
+      card.setAttribute('aria-label', `View details for ${product.name}${isBestseller ? ', bestseller' : ''}`);
+
+      const photo = makePhoto(product, 'product-photo');
+      const content = document.createElement('span');
+      content.className = 'product-content';
+
+      const tags = document.createElement('span');
+      tags.className = 'product-tags';
+      const label = document.createElement('span');
+      label.className = 'tag';
+      label.textContent = product.label || 'product';
+      tags.append(label);
+      if (isBestseller) {
+        const bestseller = document.createElement('span');
+        bestseller.className = 'tag tag-bestseller';
+        bestseller.textContent = 'Bestseller';
+        tags.append(bestseller);
+      }
+
+      const name = document.createElement('span');
+      name.className = 'product-name';
+      name.textContent = product.name;
+      const pitch = document.createElement('span');
+      pitch.className = 'product-pitch';
+      pitch.textContent = product.pitch;
+      const action = document.createElement('span');
+      action.className = 'product-action';
+      action.textContent = 'View details';
+
+      content.append(tags, name, pitch, action);
+      card.append(photo, content);
+      card.addEventListener('click', () => openDetails(product, isBestseller));
+      return card;
+    }
+
+    async function loadProducts() {
+      try {
+        const response = await fetch('products.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Product list unavailable');
+        const products = await response.json();
+        if (!Array.isArray(products)) throw new Error('Product list must be a list');
+
+        productGrid.replaceChildren();
+        loadError.hidden = true;
+        const bestseller = products[0];
+        if (bestseller) {
+          document.querySelector('#hero-photo').replaceChildren(makePhoto(bestseller, 'hero-photo-image', true));
+          document.querySelector('#bestseller-name').textContent = bestseller.name;
+          document.querySelector('#bestseller-pitch').textContent = bestseller.pitch;
+        }
+
+        document.querySelector('#collection-count').textContent = `${products.length} ${products.length === 1 ? 'character' : 'characters'}`;
+        products.forEach((product, index) => productGrid.append(makeCard(product, index)));
+        revealOnScroll();
+
+        if (products.length === 0) {
+          productGrid.innerHTML = '<p class="empty-message">No products yet. Add one to the product list to show it here.</p>';
+        }
+      } catch {
+        productGrid.replaceChildren();
+        loadError.textContent = "Can't read products.json — check for a missing comma or quote.";
+        loadError.hidden = false;
+      }
+    }
+
+    detailClose.addEventListener('click', () => detailDialog.close());
+    detailDialog.addEventListener('click', event => {
+      if (event.target === detailDialog) detailDialog.close();
+    });
+    loadProducts();
+  </script>
 </body>
 </html>
